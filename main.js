@@ -5,18 +5,25 @@ const listarNumero = document.querySelector('.lista-numeros');
 const numeros = document.querySelectorAll('.numeros');
 const numerosCpu = document.querySelectorAll('.numeros-cpu');
 
+const numerosJugados = []
 // creando un numero random con un evento click
 numeroRandom.addEventListener('click',() => {
   let numero = Math.floor((Math.random() * (51 - 1)) + 1);
-  numeroRandom.textContent = numero;
   
-  registrarRandom(numero);
+  if (!numerosJugados.includes(numero)) {
+    numerosJugados.push(numero);
+    registrarNumeroRandom(numero);
+    numeroRandom.textContent = numero;
+  }else{
+    return;
+  }
+
   compararNumerosCpu(numero, contadorCpu);
   compararNumerosPlayer(numero, contadorPlayer);
 
 });
 
-function registrarRandom(numero) {
+function registrarNumeroRandom(numero) {
   // creando un span para listar los numeros que ha arrojado el metodo random
   const span = document.createElement('span');
   span.classList.add('numeros-lista')
